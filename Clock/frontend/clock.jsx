@@ -1,47 +1,48 @@
 import React from 'react'
 
 export default class Clock extends React.Component{
-    constructor(prop){
-        super(prop);
+    constructor(){
+        super();
         
         this.state = {
             time: new Date(),
-            seconds: this.time.getSeconds,
-            minutes: this.time.getMinutes,
-            hours: this.time.getHours
         }
         // this.tick = this.tick.bind(this);
-        setInterval(this.tick.bind(this), 1000);
+        // this.intervalId = 0;
+    }
+
+ 
+
+    tick(){
+        this.setState({time: new Date()});
+    }
+
+    componentDidMount(){
+        this.intervalId = setInterval(this.tick.bind(this), 1000);
+    }
+
+    componentWillUnmount(){
+        alert('this is a 1 second warning');
+        clear(this.intervalId);
     }
 
     render(){
         return (
-            <h1>Big Ben</h1>
+            <div>
+                <h1>Big Ben</h1>
+
+                {this.format(this.state.time.getHours())}:
+                {this.format(this.state.time.getMinutes())}:
+                {this.format(this.state.time.getSeconds())}
+            </div>
+            
         )
     }
 
-    tick(){
-        let newSeconds = this.state.seconds + 1;
-        let newMinutes = this.state.minutes;
-        let newHours = this.state.hours;
-        if (newSeconds > 59){
-            newSeconds = 0;
-            newMinutes++;
+    format(a){
+        if(a < 10){
+            return '0' + a.toString();
         }
-        if (newMinutes > 59){
-            newMinutes = 0;
-            newHours++;
-        }
-
-        newHours %= 24;
-
-        this.setState({seconds: newSeconds, minutes: newMinutes, hours: newHours});
-    }
-
-    format(v){
-        if (v < 10){
-            return `0`+v.toString();
-        }
-        return v.toString();
+        return a.toString();
     }
 }

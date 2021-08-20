@@ -1,0 +1,14 @@
+h1 {
+    font-family: 'Inter', sans-serif;
+}
+
+div {
+    display: flex;
+    align-items: center;
+    font-size: x-large;
+    flex-direction: column;
+}
+
+body {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Clock_Tower_-_Palace_of_Westminster%2C_London_-_May_2007.jpg/800px-Clock_Tower_-_Palace_of_Westminster%2C_London_-_May_2007.jpg');
+}
